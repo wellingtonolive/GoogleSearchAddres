@@ -1,18 +1,19 @@
 package br.com.google.funqy;
 
 
+import br.com.google.model.LocationModel;
 import br.com.google.model.WifiAccessPointModel;
 import br.com.google.model.request.RequestGeolocate;
 import br.com.google.model.response.ResponseGeolocate;
+import br.com.google.service.ExampleService;
 import br.com.google.service.GeolocateService;
-import br.com.google.util.SecretManager;
 import io.quarkus.funqy.Funq;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.logging.Logger;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class GeolocateFunction {
     @Inject
     @RestClient
     GeolocateService geolocateService;
+
+    @Inject
+    ExampleService exampleService;
 
     WifiAccessPointModel wifiAccessPointModel = WifiAccessPointModel
             .builder()
@@ -35,36 +39,17 @@ public class GeolocateFunction {
 
     List<WifiAccessPointModel> wifiAccessPointModelList = new ArrayList<WifiAccessPointModel>();
 
-    //@GET
-    @Funq("example")
-    public String greets() {
-
-        String response = SecretManager.getValue();
-
-        return response;
-    }
 
 
+    @Funq("hello")
+    public String hello() throws Exception {
 
+        if(1==1){
 
-    @POST
-    @Funq("macaddres")
-    public ResponseGeolocate addressByMacAddress(RequestGeolocate requestGeolocate){
+            throw new Exception("Erro ao pegar user");
+        }
 
-        wifiAccessPointModelList.add(wifiAccessPointModel);
-
-        requestGeolocate = RequestGeolocate
-                .builder()
-                    .homeMobileNetworkCode(724)
-                    .homeMobileNetworkCode(1)
-                    .radioType("gms")
-                    .considerIp("false")
-                    .wifiAccessPoints(wifiAccessPointModelList)
-                .build();
-
-        ResponseGeolocate responseGeolocate = geolocateService.requestByMacAddress(requestGeolocate);
-
-        return responseGeolocate;
+        return "tearawsd";
     }
 
 }

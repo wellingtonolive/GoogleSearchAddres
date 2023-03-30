@@ -74,6 +74,11 @@
       <version>2.17.230</version>
       <type>pom</type>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-fault-tolerance</artifactId>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>
